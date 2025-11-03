@@ -1,32 +1,23 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class FrmVente
-    Inherits System.Windows.Forms.Form
-
-    Private pnlContent As Panel ' Déclaré ici pour être accessible partout
-
-
-
-    'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
-    Protected Overrides Sub Dispose(disposing As Boolean)
-        Try
-            If disposing AndAlso components IsNot Nothing Then
-                components.Dispose()
-            End If
-        Finally
-            MyBase.Dispose(disposing)
-        End Try
+﻿Public Class FrmDashboardAdmin
+    Private Sub InitializeComponent()
+        Me.SuspendLayout()
+        '
+        'FrmDashboardAdmin
+        '
+        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ResumeLayout(False)
+    End Sub
+    Private Sub FrmDashboardAdmin_Load(sender As Object, e As EventArgs) Handles Me.Load
+        AjouterCarte("Total médicaments", "248", Color.FromArgb(52, 152, 219), 300, 100)
+        AjouterCarte("Proche péremption", "12", Color.FromArgb(231, 76, 60), 580, 100)
+        AjouterCarte("Rupture de stock", "5", Color.FromArgb(241, 196, 15), 860, 100)
+        AjouterCarte("Ventes du jour", "85 000 FCFA", Color.FromArgb(46, 204, 113), 1140, 100)
+        InitialiserInterface()
     End Sub
 
-    'Required by the Windows Form Designer
-    Private components As System.ComponentModel.IContainer
+    Private Sub InitialiserInterface()
 
-    'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
-    'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
-    Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmVente))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmDashboardAdmin))
         pnlSidebar = New Panel()
         lblTitre = New Label()
         pbLogo = New PictureBox()
@@ -66,13 +57,13 @@ Partial Class FrmVente
         pbLogo.TabIndex = 1
         pbLogo.TabStop = False
         ' 
-        ' FrmVente
+        ' FrmDashboardAdmin
         ' 
         BackColor = Color.FromArgb(CByte(248), CByte(249), CByte(250))
         ClientSize = New Size(1155, 635)
         Controls.Add(pnlSidebar)
         FormBorderStyle = FormBorderStyle.FixedSingle
-        Name = "FrmVente"
+        Name = "FrmDashboardAdmin"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Pharmacie - Administrateur"
         WindowState = FormWindowState.Maximized
@@ -171,50 +162,5 @@ Partial Class FrmVente
         pnlContent.AutoScroll = True
         Me.Controls.Add(pnlContent)
 
-
     End Sub
-
-
-    ' === MÉTHODE POUR AJOUTER UNE CARTE ===
-    Private Sub AjouterCarte(titre As String, valeur As String, couleur As Color, x As Integer, y As Integer)
-        Dim card As New Panel()
-        card.Size = New Size(260, 130)
-        card.Location = New Point(x, y)
-        card.BackColor = Color.White
-        card.BorderStyle = BorderStyle.None
-
-        ' === OMBRE DOUCE (CORRIGÉ) ===
-        AddHandler card.Paint, Sub(s, e)
-                                   Using p As New Pen(Color.FromArgb(200, 200, 200), 1)
-                                       e.Graphics.DrawRectangle(p, 0, 0, card.Width - 1, card.Height - 1)
-                                   End Using
-                               End Sub
-
-        ' Titre
-        Dim lblT As New Label()
-        lblT.Text = titre
-        lblT.Font = New Font("Segoe UI", 10)
-        lblT.ForeColor = Color.FromArgb(120, 120, 120)
-        lblT.Location = New Point(20, 20)
-        card.Controls.Add(lblT)
-
-        ' Valeur
-        Dim lblV As New Label()
-        lblV.Text = valeur
-        lblV.Font = New Font("Segoe UI", 18, FontStyle.Bold)
-        lblV.ForeColor = couleur
-        lblV.AutoSize = True
-        lblV.Location = New Point(20, 50)
-        card.Controls.Add(lblV)
-
-        pnlContent.Controls.Add(card)
-    End Sub
-
-
-
-    Friend WithEvents SplitContainer1 As SplitContainer
-    Friend WithEvents pnlSidebar As Panel
-    Friend WithEvents lblTitre As Label
-    Friend WithEvents pbLogo As PictureBox
-
 End Class
